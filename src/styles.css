@@ -1,0 +1,255 @@
+/* Cibles larges et bien espacées : pensé pour la poursuite oculaire. */
+:root {
+  --bg: #1d2330;
+  --panel: #262e3e;
+  --panel-raised: #313b4f;
+  --text: #f1f4f9;
+  --muted: #aab4c5;
+  --accent: #4f9dff;
+  --accent-strong: #2f7be0;
+  --danger: #ff7a6b;
+  --ok: #7ee2a8;
+  --target: 76px; /* taille minimale d'une cible */
+  --gap: 12px;
+  font-family: system-ui, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    'toolbar viewport'
+    'command command';
+  height: 100vh;
+}
+
+.toolbar {
+  grid-area: toolbar;
+  overflow-y: auto;
+  padding: var(--gap);
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tool-section h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tool {
+  min-height: var(--target);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--panel-raised);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px;
+  font-size: 15px;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.tool .icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.tool:hover,
+.step:hover,
+.run:hover {
+  border-color: var(--accent);
+  background: #3b4760;
+}
+
+.tool:active {
+  background: var(--accent-strong);
+}
+
+.tool-wide {
+  flex-direction: row;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.step-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.step {
+  min-height: 56px;
+  border-radius: 12px;
+  border: 2px solid var(--panel-raised);
+  background: transparent;
+  font-size: 17px;
+}
+
+.step[aria-checked='true'] {
+  background: var(--accent-strong);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.viewport {
+  grid-area: viewport;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.viewport canvas {
+  display: block;
+}
+
+.labels-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shape-badge {
+  pointer-events: auto;
+  min-width: 48px;
+  height: 48px;
+  padding: 0 10px;
+  border-radius: 24px;
+  border: 3px solid #ffffff;
+  background: #1d2330;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+}
+
+.shape-badge.selected {
+  background: var(--accent-strong);
+  border-color: #ffd84d;
+}
+
+.command-bar {
+  grid-area: command;
+  background: var(--panel);
+  border-top: 2px solid var(--panel-raised);
+  padding: var(--gap) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.command-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.command-label {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+#command-input {
+  flex: 1 1 320px;
+  min-height: 64px;
+  font-size: 28px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 3px solid var(--accent);
+  background: #10151f;
+  color: var(--text);
+  outline: none;
+}
+
+#command-input:focus {
+  box-shadow: 0 0 0 4px rgb(79 157 255 / 0.35);
+}
+
+.run {
+  min-height: 64px;
+  min-width: 140px;
+  font-size: 20px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: var(--accent-strong);
+}
+
+.auto-run {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: var(--panel-raised);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.auto-run input {
+  width: 28px;
+  height: 28px;
+  accent-color: var(--accent);
+}
+
+.command-output {
+  min-height: 56px;
+  font-size: 20px;
+  white-space: pre-line;
+  color: var(--ok);
+}
+
+.command-output .said {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.command-output.error {
+  color: var(--danger);
+}
+
+@media (max-width: 760px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 45vh 1fr auto;
+    grid-template-areas:
+      'viewport'
+      'toolbar'
+      'command';
+  }
+}
