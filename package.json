@@ -1,0 +1,25 @@
+{
+  "name": "babiole",
+  "version": "0.1.0",
+  "description": "Logiciel de dessin 3D inspiré de Tinkercad, hors-ligne et pilotable à la voix ou au regard",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "typescript": "~5.9.3",
+    "vite": "~7.3.7",
+    "vite-plugin-pwa": "~1.2.0",
+    "vitest": "~5.0.5"
+  }
+}

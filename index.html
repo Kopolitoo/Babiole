@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1d2330" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <title>Babiole</title>
+  </head>
+  <body>
+    <div class="app">
+      <aside id="toolbar" class="toolbar" aria-label="Outils"></aside>
+      <main id="viewport" class="viewport" aria-label="Scène 3D"></main>
+      <footer id="command-bar" class="command-bar">
+        <div class="command-row">
+          <label for="command-input" class="command-label">Commande</label>
+          <input
+            id="command-input"
+            type="text"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Dites par exemple « cube 20 » ou « aide »"
+          />
+          <button id="command-run" type="button" class="run">Exécuter</button>
+          <label class="auto-run">
+            <input id="auto-run" type="checkbox" />
+            <span>Exécution automatique</span>
+          </label>
+        </div>
+        <output id="command-output" class="command-output" aria-live="polite"></output>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
